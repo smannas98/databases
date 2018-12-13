@@ -1,0 +1,64 @@
+1.
+-string
+-integer
+-date
+-float
+-float
+
+2.
+a text file would be used if you have a static set of data that will never change. A database is used when your sets of data will be changing and update constantly.
+
+3.
+SQL is declarative, meaning we just ask the question and it returns and answer, while other programming languages need logic and algorithms to perform the actual process of retrieving said data.
+
+4.
+A database is just a large said of data that is not readable to humans. To us, it just looks like a random mess but to the computer its sorted into a hierarchy where everything and anything can be found in the system by tracing your way to the top.
+
+5.
+A table is just the body that the database is laid out into. columns represent different types of data. Rows represent a set of data that is grouped together, And value is just the data represented in each cell of the table.
+
+6.
+string, integer, float
+
+7.
+the first set of instructions is asking for all the dates and amount of money paid out in the table ‘payments’ it would return:
+
+- 5/1/2016 | 1500.00
+- 5/10/2016 | 37.00
+- 5/15/2016 | 124.93
+- 5/23/2016 | 54.72
+
+the second set of instructions is asking for all amounts paid that is over $500 from the table ‘payments’ it would return:
+
+- 1500.00
+
+the third set of instructions is asking for all sets of data for the payee ‘mega foods’ from the table ‘payments’ it would return:
+
+- 5/15/2016 | Mega Foods | 124.93 | Groceries
+
+8.
+SELECT email, signup
+
+FROM users
+
+WHERE user = ‘DeAndre Data’;
+
+returns: 2 | DeAndre Data | datad@comcast.net | 2008-01-20
+
+SELECT userid
+
+FROM users
+
+WHERE email = ‘aleesia.algorithm@uw.edu’;
+
+returns: 1
+
+SELECT *
+
+FROM users
+
+WHERE userid = 4;
+
+returns: 4 | Brandy Boolean | bboolean@nasa.gov | 1999-10-15
+
+ 
