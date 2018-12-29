@@ -1,0 +1,225 @@
+1.
+INSERT INTO (adding)
+UPDATE, SET, WHERE (update)
+DELETE FROM, WHERE (delete)
+
+2.
+to insert data, you would first initiate the insert by calling INSERT, followed by INTO whatever table you want to insert the data into, and all the columns that will be affected by the insert. for instance if I want to add a new product to my product table i would do the following
+
+INSERT INTO products (id, name, price)
+VALUES
+(112233, ‘gaming pc’, $2499.99);
+id, name, and price are the columns being affected.
+
+to update data, you call the update command by saying UPDATE followed by the table name(products). Then you call SET followed by the column that will be updated and what the updated info is. Then you let the command know where to change it by calling WHERE followed by the condition for the placement. for example to update the price of gaming pc’s on my products table I would the following
+
+UPDATE products SET price=1999.99 WHERE id=112233;
+
+to delete data, you start the command by declaring DELETE followed by the word FROM and the name of the table the data will be deleted from. After that you tell the command where to delete the data by typing WHERE and then the conditional for the placement. for example, to delete gaming pc’s from my products table all together, i would do something like the following
+
+DELETE FROM products WHERE name=‘gaming pc’;
+
+3.
+you could use things like serial numbers(integer), IPv4 addresses(network address types), and shapes(geometric types) are just some of the endless amounts of data types that can be used in tables
+
+4.
+	first and last name = text datatype
+	whether they sent in their rsvp = boolean
+	number of guests = integer
+	number of meals = numeric
+
+	CREATE TABLE wedding-dinner (
+		last-name text,
+		first-name text,
+		RSVP’ed boolean,
+		guests integer,
+		meals numeric(2, 1)
+	);
+
+	ALTER TABLE wedding-dinner ADD COLUMN card-sent boolean;
+
+	ALTER TABLE wedding-dinner DROP COLUMN meals;
+
+	ALTER TABLE wedding-dinner ADD COLUMN table# integer;
+
+	DROP TABLE wedding-dinner;
+
+5.
+	CREATE TABLE books (
+		ISBN integer,
+		title text,
+		author text,
+		genre text,
+		publishing-date date,
+		copies integer,
+		available-copies integer
+	);
+
+	INSERT INTO books (
+		ISBN, 
+		title, 
+		author, 
+		genre, 
+		publishing-date, 
+		copies, 
+		available-copies
+	)
+
+	VALUES 
+	(
+		9780151010264,
+		’1984’,
+		‘George Orwell’,
+		‘utopian and dystopian fiction’,
+		06/08/1949,
+		10,
+		6
+	),
+
+	(
+		9780312367541,
+		‘A Wrinkle in Time’,
+		‘Madeleine L’engle’,
+		‘science fiction’,
+		01/01/1962,
+		10,
+		4	
+	),
+
+	(
+		9781451673319,
+		‘Fahrenheit 451’,
+		‘Ray Bradbury’,
+		‘utopian and dystopian fiction’,
+		10/19/1953,
+		10,
+		5
+	);
+
+	UPDATE books SET available-copies=5 WHERE title=‘1984’;
+
+	DELETE FROM books WHERE title=‘Fahrenheit 451’;
+
+6.
+
+	CREATE TABLE spacecrafts (
+		id integer,
+		name text,
+		year-launched integer,
+		country text,
+		description text,
+		orbiting-body text,
+		operational boolean,
+		distance(km) numeric(10, 9)
+	);
+
+	INSERT INTO spacecrafts (
+		id,
+		name,
+		year-launched,
+		country,
+		description,
+		orbiting-body,
+		operational,
+		distance(km)
+	)
+
+	VALUES
+	(
+		123432,
+		‘Akatsuki’,
+		2010,
+		Japan,
+		’probe sent to study climate on venus’,
+		‘venus’,
+		true,
+		261,000,000
+	),
+
+	(
+		132234,
+		‘Juno’,
+		2011,
+		‘United States of America’,
+		’study Jupiter from polar orbit’,
+		‘Jupiter’,
+		true,
+		588,000,000
+	),
+
+	(
+		124321,
+		‘New Horizons’,
+		2006,
+		‘United States of America’,
+		’study the Kuiper Belt around the outer edge of the solar system’,
+		‘Charon’,
+		true,
+		7,500,000,000
+	);
+
+	DELETE FROM spacecrafts WHERE name=‘Juno’;
+	
+	UPDATE spacecrafts SET operational=false WHERE name=‘New Horizons’;
+
+7.
+	
+	CREATE TABLE emails (
+		id integer,
+		subject text,
+		sender text,
+		recipients text,
+		body text,
+		timestamp timestamp,
+		read boolean,
+		chain-id integer
+	);
+
+	INSERT INTO emails (
+		id,
+		subject,
+		sender,
+		recipients,
+		body,
+		timestamp,
+		read,
+		chain-id
+	)
+
+	VALUES
+	(
+		1234,
+		‘rent’,
+		‘landlord’,
+		‘me’,
+		‘pay your rent online’,
+		12/20/2018 @ 10:45pm (EST),
+		true,
+		123
+	),
+
+	(
+		12345,
+		‘rsvp’,
+		‘friend’,
+		‘me’,
+		‘did you rsvp yet’,
+		12/10/2018 @ 10:30pm (EST),
+		true,
+		1234
+	),
+
+	(
+		123456,
+		‘statement’,
+		‘bank’,
+		‘me’,
+		‘here is your bank statement for the month’,
+		12/23/2018 @ 9:15pm (EST),
+		true,
+		12345
+	);
+
+	DELETE FROM emails WHERE id=12345;
+
+	UPDATE emails SET read=false WHERE id=1234;
