@@ -1,0 +1,174 @@
+1.
+	
+	SELECT * FROM table1 
+
+2.
+
+The order of operations is Select, From, and Where, or SFW. I can remember SFW as the popular internet acronym for ‘Safe For Work’.
+
+3.
+
+	| name   | gender | age |
+	| ------ | ------ | --- |
+	| Boujee | F      | 3   |
+	| Marley | M      | 0   |
+	
+	| id    |
+	| ----- |
+	| 10002 |
+	| 10004 |
+
+	| name   | age |
+	| ------ | --- |
+	| Boujee | 3   |
+
+	| id    | name      | gender | age | weight | breed              | intake_date              | in_foster                |
+	| ----- | --------- | ------ | --- | ------ | ------------------ | ------------------------ | ------------------------ |
+	| 10001 | Boujee    | F      | 3   | 36     | labrador poodle    | 2017-06-22T00:00:00.000Z |                          |
+	| 10002 | Munchkin  | F      | 0   | 8      | dachsund chihuahua | 2017-01-13T00:00:00.000Z | 2017-01-31T00:00:00.000Z |
+	| 10004 | Marley    | M      | 0   | 10     | labrador           | 2017-05-04T00:00:00.000Z | 2016-06-20T00:00:00.000Z |
+	| 10006 | Marmaduke | M      | 7   | 150    | great dane         | 2016-03-22T00:00:00.000Z | 2016-05-15T00:00:00.000Z |
+	| 10007 | Rosco     | M      | 5   | 180    | rottweiler         | 2017-04-01T00:00:00.000Z |                          |
+
+	| id    | age | weight | breed      |
+	| ----- | --- | ------ | ---------- |
+	| 10006 | 7   | 150    | great dane |
+	| 10007 | 5   | 180    | rottweiler |
+
+4.
+
+	| name     | adoption_date            |
+	| -------- | ------------------------ |
+	| Mushi    | 2016-03-22T00:00:00.000Z |
+	| Seashell |                          |
+	| Azul     | 2016-04-17T00:00:00.000Z |
+	| Victoire | 2016-09-01T00:00:00.000Z |
+	| Nala     |                          |
+
+	| name     | age |
+	| -------- | --- |
+	| Mushi    | 1   |
+	| Seashell | 7   |
+	| Azul     | 3   |
+	| Victoire | 7   |
+	| Nala     | 1   |
+
+5.
+
+	| id  | name     | gender | age | intake_date              | adoption_date            |
+	| --- | -------- | ------ | --- | ------------------------ | ------------------------ |
+	| 1   | Mushi    | M      | 1   | 2016-01-09T00:00:00.000Z | 2016-03-22T00:00:00.000Z |
+	| 2   | Seashell | F      | 7   | 2016-01-09T00:00:00.000Z |                          |
+	| 3   | Azul     | M      | 3   | 2016-01-11T00:00:00.000Z | 2016-04-17T00:00:00.000Z |
+	| 4   | Victoire | M      | 7   | 2016-01-11T00:00:00.000Z | 2016-09-01T00:00:00.000Z |
+	| 5   | Nala     | F      | 1   | 2016-01-12T00:00:00.000Z |                          |
+
+	| name     | gender |
+	| -------- | ------ |
+	| Seashell | F      |
+	| Victoire | M      |
+
+	| name     |
+	| -------- |
+	| Mushi    |
+	| Seashell |
+	| Azul     |
+	| Victoire |
+	| Nala     |
+
+6.
+(using previous cats table as examples)
+
+LESS THAN <
+-used when you want data that has a specified value less than the comparative value.
+		SELECT * FROM cats
+		WHERE age < 7;
+
+GREATER THAN >
+-used when you want data that has a specified value greater than the comparative value.
+		SELECT * FROM cats
+		WHERE age > 3;
+
+EQUAL TO =
+-used when you want data that has a specified value equal to than the comparative value.
+		SELECT * FROM cats
+		WHERE age = 1;
+
+LESS THAN OR EQUAL TO <=
+-used when you want data that has a specified value less than or equal to the comparative value.
+		SELECT * FROM cats
+		WHERE age <= 7;
+
+GREATER THAN OR EQUAL TO >=
+-used when you want data that has a specified value greater than or equal to the comparative value.
+		SELECT * FROM cats
+		WHERE age >= 1;
+
+NOT EQUAL TO !=
+-used when you want data that has a specified value that is not equal to the comparative value.
+		SELECT * FROM cats
+		WHERE age != 7;
+
+GREATER THAN OR LESS THAN <>
+-used when you want data that has a specified value that is greater than or less than the comparative value.
+		SELECT * FROM cats
+		WHERE age <> 3;
+LIKE 
+-used when you want data that has anything similar to the parameters set in the LIKE statement.
+		SELECT * FROM cats
+		WHERE name LIKE ‘%shell%’;
+		(will return data that has “shell” somewhere in it’s name)
+
+BETWEEN
+-used when you want data that has values that are between the two set points.
+		SELECT * FROM cats
+		WHERE age BETWEEN 1 AND 7;
+
+IS DISTINCT FROM 
+-used instead of greater than or less than if null input is a possibility.
+		SELECT * FROM cats
+		WHERE adoption_date IS DISTINCT FROM ’2016-03-22’;
+
+IS NULL
+-used if you want data that’s input is null to the expression.
+		SELECT * FROM cats
+		WHERE adoption_date IS NULL;
+AND 
+-used to have more than one expression for the comparative clause. All expressions must be true to get the data.
+		SELECT * FROM cats
+		WHERE age < 7 AND gender = ‘M’;
+OR
+-if you want data with multiple different criteria(doesn’t have to be all).
+		SELECT * FROM cats
+		WHERE age < 7 OR gender = ‘M’;
+NOT
+-if you want data that’s input is NOT the expression stated.
+		SELECT * FROM cats
+		WHERE age NOT 7;
+
+7.
+	| name     |
+	| -------- |
+	| Seashell |
+	| Nala     |
+
+	| name     |
+	| -------- |
+	| Mushi    |
+	| Seashell |
+	| Victoire |
+	| Nala     |
+
+	| id  |
+	| --- |
+	| 3   |
+	| 4   |
+
+
+
+
+
+
+
+
+
