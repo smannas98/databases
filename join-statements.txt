@@ -1,0 +1,225 @@
+——ALL REAL-WORLD EXAMPLES WILL BE BASED OFF A TABLE I MADE TO LIST VIDEO GAMES WITH AN ID FOR WHAT GAMING ENGINE THEY USED AND ANOTHER TABLE THAT HOLDS THE GAMING ENGINE THAT CORRESPONDS WITH THE ENGINE ID—-
+GAMES TABLE:
+| name                 | publisher         | release_date | engine_id |
+| -------------------- | ----------------- | ------------ | --------- |
+| undertale            | NULL              | 2015         | 3         |
+| rust                 | facepunch studios | 2013         | 2         |
+| crysis               | electronic arts   | 2011         | 4         |
+| kerbal space program | squad             | 2011         | NULL      |
+| gears of war 3       | epic games        | 2011         | 1         |
+| cities: skylines     | colossal order    | 2015         | 2         |
+
+ENGINES TABLE:
+| id  | name             |
+| --- | ---------------- |
+| 3   | gamemaker engine |
+| 2   | unity engine     |
+| 4   | cryEngine        |
+| 1   | unreal engine    |
+—————————————————————————————————————————————————————————————————————————————————————
+—————————————————————————————————————————————————————————————————————————————————————
+
+1.
+you would use the JOIN command in SQL.
+
+2.———————————————————————————————————————————————————————————
+INNER JOIN combines tables together and outputs a new table with rows that both tables have in common. Example:
+   	SELECT games.name, engines.name 
+    	FROM games
+    	JOIN engines
+    	ON games.engine_id = engines.id;
+
+| name             | name             |
+| ---------------- | ---------------- |
+| gears of war 3   | unreal engine    |
+| rust             | unity engine     |
+| cities: skylines | unity engine     |
+| undertale        | gamemaker engine |
+| crysis           | cryEngine        |
+
+the output table only shows rows where id’s corresponded between tables.
+
+LEFT OUTER JOIN combines two tables and outputs a tables whose rows match the first table and and has the second table correspond to the rows whether it has a null value or not. Example:
+	
+    SELECT games.name, engines.name
+    FROM games
+    LEFT OUTER JOIN engines
+    ON games.engine_id = engines.id;
+
+| name                 | name             |
+| -------------------- | ---------------- |
+| gears of war 3       | unreal engine    |
+| rust                 | unity engine     |
+| cities: skylines     | unity engine     |
+| undertale            | gamemaker engine |
+| crysis               | cryEngine        |
+| kerbal space program | NULL             |
+
+As you can see, it displays every row on the left side of the table(first table) and tries to correspond every row on the right side to match with the left side, even if it returns null.
+
+RIGHT OUTER JOIN combines two tables and outputs a table whose rows match the second table and has the first table’s rows correspond to them even if it has a null value. Example:
+    SELECT games.name, engines.name
+    FROM engines
+    LEFT OUTER JOIN games
+    ON games.engine_id = engines.id;
+
+| name             | name             |
+| ---------------- | ---------------- |
+| gears of war 3   | unreal engine    |
+| rust             | unity engine     |
+|  NULL            | unity engine     |
+| cities: skylines | unity engine     |
+| undertale        | gamemaker engine |
+| crysis           | cryEngine        |
+
+3.—————————————————————————————————————————————————————————————————
+
+primary key is the unique id for a database table. Foreign key is a unique id for a database table but a non-unique id in another table. for example: the column ‘engine_id’ in the ‘games’ table would be considered a foreign key in that table. But the ‘id’ column in the ‘engines’ table holds the corresponding values to the ‘games’ table but they are considered primary keys for the ‘engine’ table.
+
+4.————————————————————————————————————————————————————————————————
+
+aliasing is when you write out SQL commands in shorthand, or using variables to make the command a little shorter to type.
+
+5.—————————————————————————————————————————————————————————————
+
+SELECT p.name, c.salary, c.vacation_days 
+FROM professor AS p
+JOIN compensation AS c
+ON p.id = c.professor_id;
+
+6.————————————————————————————————————————————————————————————
+
+NATURAL JOIN is when you combine two tables and output a table that has every column that both tables have in common. Example:
+	SELECT * 
+	FROM games
+	NATURAL JOIN engines;
+This will return a table that only has columns that both tables have in common.
+
+7.—————————————————————————————————————————————————————————————
+
+    SELECT e.name, s.date, s.start_time, s.end_time
+    FROM employees AS e
+    JOIN shifts AS s
+    ON e.id = s.id;
+
+| name               | date       | start_time | end_time |
+| ------------------ | ---------- | ---------- | -------- |
+| Hermione Granger   | 1998-03-09 | 08:00:00   | 12:00:00 |
+| Ronald Weasley     | 1998-03-09 | 08:00:00   | 16:00:00 |
+| Luna Lovegood      | 1998-03-09 | 12:00:00   | 16:00:00 |
+| Draco Malfoy       | 1998-03-09 | 12:00:00   | 20:00:00 |
+| Padma Patil        | 1998-03-09 | 16:00:00   | 20:00:00 |
+| Neville Longbottom | 1998-03-10 | 08:00:00   | 12:00:00 |
+| Cedric Diggory     | 1998-03-10 | 08:00:00   | 16:00:00 |
+| Cho Chang          | 1998-03-10 | 12:00:00   | 16:00:00 |
+| Dean Thomas        | 1998-03-10 | 12:00:00   | 20:00:00 |
+
+8.—————————————————————————————————————————————————————————————————————————————
+
+    SELECT volunteers.first_name, dogs.name
+    FROM volunteers
+    LEFT OUTER JOIN dogs
+    ON volunteers.foster_dog_id = dogs.id;
+
+| first_name | name      |
+| ---------- | --------- |
+| Rubeus     | Munchkin  |
+| Marjorie   | Marmaduke |
+| Sirius     |           |
+| Remus      |           |
+| Albus      |           |
+
+    SELECT cats.name, adopters.first_name, cat_adoptions.date
+    FROM cats
+    JOIN cat_adoptions ON cat_adoptions.cat_id = cats.id
+    JOIN adopters ON adopters.id = cat_adoptions.adopter_id
+    WHERE cat_adoptions.date >= CURRENT_DATE - INTERVAL '30 DAYS';
+
+| name     | first_name | date                     |
+| -------- | ---------- | ------------------------ |
+| Mushi    | Arabella   | 2018-12-18T00:00:00.000Z |
+| Victoire | Argus      | 2018-12-23T00:00:00.000Z |
+
+    SELECT a.first_name, a.last_name
+    FROM adopters AS a
+    JOIN dog_adoptions AS da
+    ON a.id != da.adopter_id;
+
+| first_name | last_name |
+| ---------- | --------- |
+| Hermione   | Granger   |
+| Arabella   | Figg      |
+
+    SELECT d.id, d.name
+    FROM dogs AS d
+    LEFT JOIN dog_adoptions AS da 
+    ON da.dog_id = d.id
+    WHERE da.date IS NULL;
+
+| id    | name      |
+| ----- | --------- |
+| 10002 | Munchkin  |
+| 10001 | Boujee    |
+| 10003 | Lassie    |
+| 10004 | Marley    |
+| 10006 | Marmaduke |
+
+    SELECT c.id, c.name
+    FROM cats AS c 
+     LEFT JOIN cat_adoptions AS ca 
+    ON ca.cat_id = c.id
+    WHERE ca.date IS NULL;
+
+| id  | name     |
+| --- | -------- |
+| 2   | Seashell |
+| 5   | Nala     |
+
+    SELECT adopters.first_name, adopters.last_name
+    FROM adopters
+    JOIN dog_adoptions AS da ON da.adopter_id = adopters.id
+    JOIN dogs ON dogs.id = da.dog_id;
+
+| first_name | last_name |
+| ---------- | --------- |
+| Argus      | Filch     |
+
+9.—————————————————————————————————————————————————————————
+
+    SELECT patrons.name, holds.rank
+    FROM patrons
+    JOIN holds
+    ON patrons.id = holds.patron_id
+    JOIN books 
+    ON books.isbn = holds.isbn
+    WHERE books.title = 'Advanced Potion-Making';
+
+| name           | rank |
+| -------------- | ---- |
+| Cedric Diggory | 2    |
+| Terry Boot     | 1    |
+
+    SELECT patrons.id, patrons.name, books.title
+    FROM transactions
+    LEFT OUTER JOIN patrons
+    ON transactions.patron_id = patrons.id
+    JOIN books
+    ON books.isbn = transactions.isbn;
+
+| id  | name             | title                                   |
+| --- | ---------------- | --------------------------------------- |
+| 1   | Hermione Granger | Hogwarts: A History                     |
+| 4   | Cho Chang        | Advanced Potion-Making                  |
+| 2   | Terry Boot       | Fantastic Beasts and Where to Find Them |
+| 3   | Padma Patil      | Fantastic Beasts and Where to Find Them |
+| 2   | Terry Boot       | Advanced Potion-Making                  |
+| 1   | Hermione Granger | Fantastic Beasts and Where to Find Them |
+| 5   | Cedric Diggory   | Fantastic Beasts and Where to Find Them |
+
+
+
+
+
+
+
+
