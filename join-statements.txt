@@ -204,17 +204,13 @@ This will return a table that only has columns that both tables have in common.
     LEFT OUTER JOIN patrons
     ON transactions.patron_id = patrons.id
     JOIN books
-    ON books.isbn = transactions.isbn;
+    ON books.isbn = transactions.isbn
+    WHERE transactions.checked_in_date IS NULL;
 
-| id  | name             | title                                   |
-| --- | ---------------- | --------------------------------------- |
-| 1   | Hermione Granger | Hogwarts: A History                     |
-| 4   | Cho Chang        | Advanced Potion-Making                  |
-| 2   | Terry Boot       | Fantastic Beasts and Where to Find Them |
-| 3   | Padma Patil      | Fantastic Beasts and Where to Find Them |
-| 2   | Terry Boot       | Advanced Potion-Making                  |
-| 1   | Hermione Granger | Fantastic Beasts and Where to Find Them |
-| 5   | Cedric Diggory   | Fantastic Beasts and Where to Find Them |
+| id  | name           | title                                   |
+| --- | -------------- | --------------------------------------- |
+| 2   | Terry Boot     | Advanced Potion-Making                  |
+| 5   | Cedric Diggory | Fantastic Beasts and Where to Find Them |
 
 
 
